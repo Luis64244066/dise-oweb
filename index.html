@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MI PRIMERA PAGINA DE TURISMO</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+            color: #28a745;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            font-size: 1.5rem;
+            background-color: #28a745;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .btn-warning {
+            margin-bottom: 10px;
+        }
+        table th, table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .active {
+            background-color: #e2e3e5;
+        }
+        #total {
+            font-weight: bold;
+            background-color: #e9ecef;
+        }
+        #res {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .admin-link {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RESERVA DE TOURS</h1>  
+        <div class="card">
+            <div class="card-header">
+                TOUR RESERVA
+                <div class="text-right">
+                    <a href="https://trabajodiseo0.netlify.app/" class="btn btn-warning admin-link">ADMINISTRADOR</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>CANT</th>
+                            <th>DETALLES</th>
+                            <th>P.U.</th>
+                            <th>SUBTOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="number" class="form-control" id="cant1" onkeyup="calcular()" value="0"></td>
+                            <td>
+                                <select name="det1" id="det1" class="form-control" onchange="mostrar1()">
+                                    <option>Turismo cultural de Bolivia</option>
+                                    <option value="T01">Tour a la ciudad de Sucre</option>
+                                    <option value="T02">Tour por la ciudad de Potosi</option>
+                                    <option value="T03">Tour por las ruinas de Tiwanaku</option>
+                                </select>
+                                <div id="desc1"></div>
+                            </td>
+                            <td><input type="number" class="form-control" id="pu1" onkeyup="calcular()" value="0"></td>
+                            <td><input type="number" class="form-control" id="subt1" value="0" readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input type="number" class="form-control" id="cant2" onkeyup="calcular()" value="0"></td>
+                            <td>
+                                <select name="det2" id="det2" class="form-control" onchange="mostrar2()">
+                                    <option>Turismo de naturaleza por Bolivia</option>
+                                    <option value="T01">Tour por el Parque Nacional Madidi</option>
+                                    <option value="T02">Tour por la laguna colorada</option>
+                                    <option value="T03">Tour por el Parque Nacional Toro Toro</option>
+                                    <option value="T04">Tour por el Pantanal Boliviano</option>
+                                    <option value="T05">Tour por las Cataratas Arcoiris del Parque Noel Kempff</option>
+                                </select>
+                                <div id="desc2"></div>
+                            </td>
+                            <td><input type="number" class="form-control" id="pu2" onkeyup="calcular()" value="0"></td>
+                            <td><input type="number" class="form-control" id="subt2" value="0" readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input type="number" class="form-control" id="cant3" onkeyup="calcular()" value="0"></td>
+                            <td>
+                                <select name="det3" id="det3" class="form-control" onchange="mostrar3()">
+                                    <option>Turismo de gastronomia</option>
+                                    <option value="T01">Tour por los restaurantes de La Paz</option>
+                                    <option value="T02">Tour por los restaurantes callejeros de Cochabamba</option>
+                                    <option value="T03">Tour por la cocina de la amazonía Boliviana</option>
+                                </select>
+                                <div id="desc3"></div>
+                            </td>
+                            <td><input type="number" class="form-control" id="pu3" onkeyup="calcular()" value="0"></td>
+                            <td><input type="number" class="form-control" id="subt3" value="0" readonly></td>
+                        </tr>
+                        <tr class="active">
+                            <th colspan="3" class="text-right">TOTAL:</th>
+                            <th><input type="number" class="form-control" id="total" readonly></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer"><h2 id="res">Resumen...</h2></div>
+        </div>  
+    </div>
+
+    <script>
+        function calcular() { 
+            var cant1 = parseInt(document.getElementById("cant1").value);
+            var pu1 = parseFloat(document.getElementById("pu1").value);
+            document.getElementById("subt1").value = (pu1 * cant1).toFixed(2);
+
+            var cant2 = parseInt(document.getElementById("cant2").value);
+            var pu2 = parseFloat(document.getElementById("pu2").value);
+            document.getElementById("subt2").value = (pu2 * cant2).toFixed(2);
+
+            var cant3 = parseInt(document.getElementById("cant3").value);
+            var pu3 = parseFloat(document.getElementById("pu3").value);
+            document.getElementById("subt3").value = (pu3 * cant3).toFixed(2);
+
+            document.getElementById("total").value = (pu1 * cant1 + pu2 * cant2 + pu3 * cant3).toFixed(2);
+        }
+
+        function mostrar1() {
+            var indice = document.getElementById("det1").selectedIndex;
+            var detalles;
+            switch (indice) {
+                case 1:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tourc1.jpeg" width="120px"></td><td>Dificultad: Baja</td></tr>' +
+                        "<tr><td>Duración: 10 días</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                case 2:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tourc2.jpeg" width="120px"></td><td>Dificultad: Baja</td></tr>' +
+                        "<tr><td>Duración: 10 días</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                case 3:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tourc3.jpg" width="120px"></td><td>Dificultad: Baja</td></tr>' +
+                        "<tr><td>Duración: 10 días</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                default:
+                    detalles = "Selecciones una opción";
+            }
+            document.getElementById("desc1").innerHTML = detalles;
+        }
+
+        function mostrar2() {
+            var indice = document.getElementById("det2").selectedIndex;
+            var detalles;
+            switch (indice) {
+                case 1:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tour1.jpeg" width="120px"></td><td>Dificultad: Alta</td></tr>' +
+                        "<tr><td>Duración: 10 días</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                case 2:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tour2.jpeg" width="120px"></td><td>Dificultad: Alta</td></tr>' +
+                        "<tr><td>Duración: 15 días</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                case 3:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tour3.jpeg" width="120px"></td><td>Dificultad: Alta</td></tr>' +
+                        "<tr><td>Duración: 17 días</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                case 4:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tour4.jpeg" width="120px"></td><td>Dificultad: Alta</td></tr>' +
+                        "<tr><td>Duración: 14 días</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                case 5:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tour5.jpeg" width="120px"></td><td>Dificultad: Alta</td></tr>' +
+                        "<tr><td>Duración: 12 días</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                default:
+                    detalles = "error";
+            }
+            document.getElementById("desc2").innerHTML = detalles;
+        }
+
+        function mostrar3() {
+            var indice = document.getElementById("det3").selectedIndex;
+            var detalles;
+            switch (indice) {
+                case 1:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tourg1.jpg" width="120px"></td><td>Dificultad: Baja</td></tr>' +
+                        "<tr><td>Duración: 1 día</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                case 2:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tourg2.jpg" width="120px"></td><td>Dificultad: Baja</td></tr>' +
+                        "<tr><td>Duración: 2 días</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                case 3:
+                    detalles = "<table>" +
+                        '<tr><td rowspan="3"><img src="img/tour3.jpeg" width="120px"></td><td>Dificultad: Baja</td></tr>' +
+                        "<tr><td>Duración: 2 días</td></tr>" +
+                        "<tr><td>Guía: Incluido</td></tr>" +
+                        "</table>";
+                    break;
+                default:
+                    detalles = "Seleccione una opción";
+            }
+            document.getElementById("desc3").innerHTML = detalles;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
